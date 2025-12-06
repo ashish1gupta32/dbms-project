@@ -1,7 +1,5 @@
 package com.sarika.silkhouse.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 @SuppressWarnings("deprecation")
 public class Billing {
     Long billing_id;
@@ -16,15 +14,16 @@ public class Billing {
     public Billing() {
     }
 
-    public Billing(int product_id,int quantity ) {
-        this.product_id=product_id;
-        this.quantity=quantity;
+    public Billing(int product_id, int quantity) {
+        this.product_id = product_id;
+        this.quantity = quantity;
     }
-    public Billing(Long customer_id,String billing_date,String modeofpayment){
-        this.customer_id=customer_id;
-        this.billing_date=billing_date;
-        this.modeofpayment=modeofpayment;
-	}
+
+    public Billing(Long customer_id, String billing_date, String modeofpayment) {
+        this.customer_id = customer_id;
+        this.billing_date = billing_date;
+        this.modeofpayment = modeofpayment;
+    }
 
     public Long getBilling_id() {
         return billing_id;
@@ -33,8 +32,6 @@ public class Billing {
     public void setBilling_id(Long billing_id) {
         this.billing_id = billing_id;
     }
-
-    
 
     public int getQuantity() {
         return quantity;
@@ -91,6 +88,5 @@ public class Billing {
     public void setPrice(Long price) {
         this.price = price;
     }
-  
-	
+
 }
