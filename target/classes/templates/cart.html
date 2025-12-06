@@ -1,49 +1,86 @@
 <th:block th:include="header"></th:block>
 <title>Items</title>
 </head>
+
 <body>
 
-	<br>
-	<br>
-	<br>
-	<div class="container">
-	<table class="table table-striped">
-	<thead>
-      <tr>
-        <th>ITEM</th>
-        <th>PRICE</th>
-        <th>QUANTITY</th>
-        <th>UPDATE</th>
-        <th>SUB-TOTAL</th>
-        <th>REMOVE</th>
-      </tr>
-    </thead>
-    <tbody>
+  <br>
+  <br>
+  <br>
+  <th:block <!--================Cart Area=================-->
+    <section class="cart_area section_padding">
+      <div class="container">
+        <div class="cart_inner">
+          <div class="table-responsive">
+            <table class="table cart-table">
+              <thead>
+                <tr>
+                  <th scope="col">Product</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="cart: ${list}" class="cart-item-row">
+                  <td>
+                    <div class="media">
+                      <div class="d-flex">
+                        <img src="https://placehold.co/100x100/png?text=Item" alt="" style="border-radius: 8px;">
+                      </div>
+                      <div class="media-body">
+                        <p th:text="${cart.name}">Product Name</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <h5 th:text="${cart.price}">Price</h5>
+                  </td>
+                  <td>
+                    <div class="product_count">
+                      <form th:action="@{'/buyitem/update/'+${cart.product_id}}" method="post"
+                        class="d-flex align-items-center">
+                        <input class="input-number form-control" type="number" name="quantity"
+                          th:value="${cart.quantity}" min="1" max="10" style="width: 70px; margin-right: 10px;">
+                        <button type="submit" class="btn_1" style="padding: 5px 15px; font-size: 12px;">Update</button>
+                      </form>
+                    </div>
+                  </td>
+                  <td>
+                    <h5 th:text="${cart.total_price}">Total</h5>
+                  </td>
+                  <td>
+                    <a th:href="@{'/buyitem/deleteitems/'+${cart.product_id}}" class="btn_3"
+                      style="padding: 5px 10px; color: red;"><i class="fas fa-trash"></i></a>
+                  </td>
+                </tr>
 
-<tr th:each="item: ${list}"> 
-<td><span th:text="${item.name}"> item </span></td>
-<td><span th:text="${item.getPrice()}"> price </span></td>
-<td><span th:text="${item.getQuantity()}"> quantity</span></td>
-<td>
-<form method ="post" th:action="${'update/'+item.getProduct_id()+''}" modelAttribute="cart" >
-<input type="int" name="quantity" th:value="${item.getQuantity() }" />
-<input type ="submit" value="update" />
-</form>
-</td>
-<td><span th:text="${total}"> total</span></td>
-<td><a th:href="${'deleteitems/'+item.getProduct_id()+''}">DELETE ITEM</a></td>
-</tr>
-
-</c:forEach> 
-</tbody>
-</table>
-<h>
-<th><span th:text="${'SUB-TOTAL:'+total+''}" style="font-weight: bold; font-size: 25px" > total</span></th></h>
-</div>
-<script src="/dbms/webjars/jquery/1.11.1/jquery.min.js"></script>
-<script src="/dbms/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <h5>Subtotal</h5>
+                  </td>
+                  <td>
+                    <h5 th:text="${total}">Total</h5>
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="checkout_btn_inner float-right">
+              <a class="btn_1" href="/products">Continue Shopping</a>
+              <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================End Cart Area =================-->
+    <script src="/dbms/webjars/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/dbms/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 <th:block th:include="tail"></th:block>
+
 </html>
-
-

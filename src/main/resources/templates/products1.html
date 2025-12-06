@@ -1,109 +1,129 @@
 <th:block th:include="header"></th:block>
 
-    <!--================Home Banner Area =================-->
-    <!-- breadcrumb start-->
-    <section class="breadcrumb breadcrumb_bg">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="breadcrumb_iner">
-                        <div class="breadcrumb_iner_item">
-                            <p>Home / Category</p>
-                        </div>
+<!--================Home Banner Area =================-->
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <p>Home / Category</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- breadcrumb start-->
+    </div>
+</section>
+<!-- breadcrumb start-->
 
-    <!--================Category Product Area =================-->
-
-    <section class="cat_product_area section_padding border_top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="left_sidebar_area">
-                        <aside class="right_widgets p_filter_widgets sidebar_box_shadow"></aside>
-                            <div class="l_w_title">
-                                <h3>Browse Categories</h3>
+<!--================Category Product Area =================-->
+<section class="cat_product_area section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="left_sidebar_area">
+                    <aside class="right_widgets p_filter_widgets sidebar_box_shadow">
+                        <div class="l_w_title">
+                            <h3>Browse Categories</h3>
+                        </div>
+                        <div class="widgets_inner">
+                            <ul class="list">
+                                <li class="sub-menu">
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <span th:text="${var1}">Category</span>
+                                        <div class="right ti-plus"></div>
+                                    </a>
+                                    <ul>
+                                        <li><a th:href="${'/products/'+var1+'/formal'}">formal</a></li>
+                                        <li><a th:href="${'/products/'+var1+'/casual'}">casual</a></li>
+                                        <li><a th:href="${'/products/'+var1+'/ethnic'}">ethnic</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="product_top_bar d-flex justify-content-between align-items-center">
+                            <div class="single_product_menu">
+                                <p><span th:text="${products.size()}"></span> Products Found</p>
                             </div>
-                            <div class="widgets_inner">
-                                <ul class="list">
-                                    <li class="sub-menu">
-                                        <a href="#" class=" d-flex justify-content-between">
-                                            <td><span th:text="${var1}"> var1 </span></td>
-                                            <div class="right ti-plus"></div>
-                                        </a>
-                                        <ul>
-                                            <li>
-                                                <a th:href="${''+var1+'/formal'}">formal</a>
-                                            </li>
-                                            <li>
-                                                <a th:href="${''+var1+'/casual'}">casual</a>
-                                            </li>
-                                            <li>
-                                                <a th:href="${''+var1+'/ethnic'}">ethnic</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                        </aside>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-9">
-                        <head>
-                            <title>products</title>
-                         </head>
-                                <head>
-                                        <style>
-                                       table {
-                                width: 100%;
-                              }
-                              
-                              th {
-                                height: 50px;
-                              }
-                                        </style>
-                                        </head>
-                                                <body> 
-                            <table border = "3" cellpadding = "15" cellspacing = "60"  bordercolor = "blue" >
-                               <tr>
-                                <th>name</th>
-                                <th>material</th>
-                                <th>product_type</th>
-                                <th>product_category</th>
-                                <th>price</th>
-                                <th>discount</th>
-                                <th>ADD TO CART</th>
-                               </tr>
-                               <tr>
-                                <tr th:each="product: ${products}"> 
-                                
-                                    <div class="col-lg-4 col-sm-6">
-                                                <div class="category_product_text">
-                                                    <td><span th:text="${product.name}"> name </span></td>
-                                                    <td><span th:text="${product.material}"> materail </span></td>
-                                                    <td><span th:text="${product.product_type}"> product_type </span></td>
-                                                    <td><span th:text="${product.product_category}"> product_category</span></td>
-                                                    <td><span th:text="${product.price}"> price </span></td>
-                                                    <td><span th:text="${product.discount}"> discount </span></td>
-                                                    <td><a th:href="${'/buyitem/addtocart/'+product.product_id+''}">Add to Cart</a></td>
-                                        </div>
-                                    </div>
-                                </tr>
-                               </tr>
-                            </table>
-                         </body>
-                        <div class="col-lg-12 text-center">
-                            <a href="#" class="btn_2">More Items</a>
+
+                <div class="row align-items-center latest_product_inner">
+                    <div class="col-lg-4 col-sm-6" th:each="product: ${products}">
+                        <div class="single-product-card">
+                            <div class="product-img-wrapper">
+                                <img src="https://placehold.co/300x300/png?text=Product" alt="Product Image">
+                            </div>
+                            <div class="product-content">
+                                <h5 class="product-title" th:text="${product.name}">Product Name</h5>
+                                <p class="product-price">₹ <span th:text="${product.price}">0</span></p>
+                                <a th:href="${'/buyitem/addtocart/'+product.product_id}" class="add-to-cart-btn"
+                                    onclick="animateToCart(event, this)">
+                                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!--================End Category Product Area =================-->
-    <th:block th:include="tail"></th:block>
+    </div>
+</section>
+<!--================End Category Product Area =================-->
+
+<script>
+    function animateToCart(event, btn) {
+        event.preventDefault();
+        const cartIcon = document.querySelector('.cart-icon');
+        if (!cartIcon) {
+            window.location.href = btn.href;
+            return;
+        }
+
+        const productCard = btn.closest('.single-product-card');
+        const img = productCard.querySelector('img');
+
+        const flyImg = img.cloneNode();
+        flyImg.classList.add('fly-animation');
+
+        const rect = img.getBoundingClientRect();
+        flyImg.style.top = rect.top + 'px';
+        flyImg.style.left = rect.left + 'px';
+        flyImg.style.width = rect.width + 'px';
+        flyImg.style.height = rect.height + 'px';
+        flyImg.style.position = 'fixed';
+        flyImg.style.zIndex = '9999';
+        flyImg.style.borderRadius = '50%';
+
+        document.body.appendChild(flyImg);
+
+        const cartRect = cartIcon.getBoundingClientRect();
+        const x = cartRect.left - rect.left;
+        const y = cartRect.top - rect.top;
+
+        flyImg.style.transition = 'all 0.8s ease-in-out';
+
+        // Trigger reflow
+        flyImg.offsetHeight;
+
+        flyImg.style.transform = `translate(${x}px, ${y}px) scale(0.1)`;
+        flyImg.style.opacity = '0.5';
+
+        setTimeout(() => {
+            flyImg.remove();
+            window.location.href = btn.href;
+        }, 800);
+    }
+</script>
+<th:block th:include="tail"></th:block>
 </body>
 
 </html>
